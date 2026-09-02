@@ -1,0 +1,191 @@
+{
+  "profile": {
+    "name": "Daniyal Ahmed",
+    "shortName": "Daniyal",
+    "tagline": "I build fast, resilient systems that hold up at scale.",
+    "role": "Senior Software Engineer",
+    "specialization": "Backend Systems & Distributed Infrastructure",
+    "location": "Lahore, Pakistan",
+    "yearsOfExperience": 9,
+    "bio": "I'm a senior software engineer with nine years of experience designing backend systems, distributed infrastructure, and the occasional interface when a team needs one. My work spans fintech, logistics, and applied AI, usually starting the same way: a system that used to work is starting to buckle, and someone needs it rebuilt without stopping the business in the process. I care about systems that stay legible as they grow, teams that ship without heroics, and code that is still easy to read a year after I wrote it.",
+    "avatarSvg": "<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='avatarGrad' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='#8B5CF6'/><stop offset='50%' stop-color='#D946EF'/><stop offset='100%' stop-color='#F97316'/></linearGradient></defs><rect width='200' height='200' rx='24' fill='#131313'/><circle cx='100' cy='78' r='34' fill='none' stroke='url(#avatarGrad)' stroke-width='3'/><path d='M40 168c8-38 40-58 60-58s52 20 60 58' fill='none' stroke='url(#avatarGrad)' stroke-width='3' stroke-linecap='round'/></svg>",
+    "social": {
+      "github": "https://github.com/daniyalahmed",
+      "instagram": "",
+      "linkedin": "https://linkedin.com/in/daniyalahmed-dev",
+      "email": "hello@daniyalahmed.dev",
+      "phone": "+92 300 1234567",
+      "website": ""
+    }
+  },
+  "skills": {
+    "categories": [
+      {
+        "name": "Languages",
+        "items": ["TypeScript", "Go", "Python", "Rust", "SQL"]
+      },
+      {
+        "name": "Backend",
+        "items": ["Node.js", "PostgreSQL", "Redis", "Kafka", "gRPC", "GraphQL"]
+      },
+      {
+        "name": "Cloud & Infra",
+        "items": ["AWS", "Docker", "Kubernetes", "Terraform", "CI/CD"]
+      },
+      {
+        "name": "Frontend",
+        "items": ["React", "Next.js", "Tailwind CSS", "Framer Motion"]
+      },
+      {
+        "name": "AI / LLM",
+        "items": ["RAG pipelines", "Vector search", "LangChain", "Model evaluation"]
+      }
+    ]
+  },
+  "experience": [
+    {
+      "company": "Northgate Systems",
+      "role": "Senior Software Engineer",
+      "period": "2022 — Present",
+      "location": "Remote",
+      "summary": "Leading the platform team responsible for the payments ledger and settlement pipeline used across the company's core products.",
+      "highlights": [
+        "Redesigned the settlement pipeline, cutting reconciliation time from hours to minutes",
+        "Introduced an event-sourced ledger that made audits and disputes traceable end to end",
+        "Mentored four engineers into senior roles and rebuilt the on-call rotation around sustainable ownership"
+      ]
+    },
+    {
+      "company": "Fathom Logistics",
+      "role": "Software Engineer II",
+      "period": "2019 — 2022",
+      "location": "Karachi, Pakistan",
+      "summary": "Owned the routing and dispatch service that scheduled deliveries across a fleet operating in six cities.",
+      "highlights": [
+        "Rebuilt the dispatch engine on Go and Kafka, tripling throughput during peak season",
+        "Cut infrastructure spend by 40% by moving batch jobs off always-on instances",
+        "Designed the internal SDK that let five product teams integrate with dispatch safely"
+      ]
+    },
+    {
+      "company": "Vertex Labs",
+      "role": "Software Engineer",
+      "period": "2017 — 2019",
+      "location": "Lahore, Pakistan",
+      "summary": "Built customer-facing features for a B2B analytics dashboard, from data pipeline to UI.",
+      "highlights": [
+        "Shipped the self-serve reporting builder that became the product's top-used feature",
+        "Migrated the frontend from a legacy jQuery codebase to React with zero downtime",
+        "Set up the team's first automated testing pipeline, catching regressions before release"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "ledger-core",
+      "title": "Ledger Core",
+      "subtitle": "Event-sourced financial ledger",
+      "description": "An event-sourced ledger and settlement engine built to make every transaction traceable, reversible, and auditable without locking the whole system for consistency.",
+      "stack": ["Go", "PostgreSQL", "Kafka", "gRPC"],
+      "role": "Lead Engineer",
+      "year": "2023",
+      "link": "https://github.com/daniyalahmed/ledger-core",
+      "image": "",
+      "highlight": true
+    },
+    {
+      "id": "routewise",
+      "title": "RouteWise",
+      "subtitle": "Real-time dispatch and routing engine",
+      "description": "A routing service that recalculates delivery assignments in real time as traffic, driver availability, and order volume shift throughout the day.",
+      "stack": ["Go", "Kafka", "Redis", "Kubernetes"],
+      "role": "Senior Engineer",
+      "year": "2021",
+      "link": "https://github.com/daniyalahmed/routewise",
+      "image": "",
+      "highlight": true
+    },
+    {
+      "id": "docmind",
+      "title": "DocMind",
+      "subtitle": "Retrieval-augmented document assistant",
+      "description": "An internal tool that lets teams ask questions across thousands of internal documents, with citations back to the source paragraph.",
+      "stack": ["Python", "LangChain", "pgvector", "Next.js"],
+      "role": "Founding Engineer",
+      "year": "2024",
+      "link": "https://github.com/daniyalahmed/docmind",
+      "image": "",
+      "highlight": false
+    },
+    {
+      "id": "pulse-dashboard",
+      "title": "Pulse Dashboard",
+      "subtitle": "Self-serve analytics builder",
+      "description": "A drag-and-drop reporting builder that let non-technical teams construct dashboards from raw product data without writing SQL.",
+      "stack": ["React", "TypeScript", "GraphQL"],
+      "role": "Software Engineer",
+      "year": "2019",
+      "link": "",
+      "image": "",
+      "highlight": false
+    },
+    {
+      "id": "signalbox",
+      "title": "Signalbox",
+      "subtitle": "Alerting and on-call orchestration",
+      "description": "A lightweight alerting layer built to replace a fragile patchwork of cron jobs and scripts, with clear escalation paths and no alert fatigue.",
+      "stack": ["Node.js", "Redis", "Terraform"],
+      "role": "Senior Engineer",
+      "year": "2022",
+      "link": "https://github.com/daniyalahmed/signalbox",
+      "image": "",
+      "highlight": false
+    }
+  ],
+  "education": [
+    {
+      "institution": "Lahore University of Management Sciences",
+      "degree": "B.Sc. in Computer Science",
+      "period": "2013 — 2017",
+      "location": "Lahore, Pakistan",
+      "detail": "Focused on distributed systems and databases; teaching assistant for the Systems Programming course."
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t1",
+      "quote": "Daniyal is the engineer you want on the system nobody else wants to touch. He rebuilt our ledger without a single day of downtime.",
+      "name": "Hira Saeed",
+      "role": "VP of Engineering, Northgate Systems",
+      "avatarColor": "#8B5CF6"
+    },
+    {
+      "id": "t2",
+      "quote": "He has a rare instinct for finding the simplest version of a hard problem, then building it so the next person can extend it.",
+      "name": "Omar Farooq",
+      "role": "CTO, Fathom Logistics",
+      "avatarColor": "#D946EF"
+    },
+    {
+      "id": "t3",
+      "quote": "Every design review with Daniyal made the final system better. He asks the questions that save you six months later.",
+      "name": "Layla Chaudhry",
+      "role": "Staff Engineer, Vertex Labs",
+      "avatarColor": "#F97316"
+    },
+    {
+      "id": "t4",
+      "quote": "He shipped our routing rewrite ahead of schedule and left behind documentation so clear the on-call team barely needed him.",
+      "name": "Bilal Rauf",
+      "role": "Product Lead, Fathom Logistics",
+      "avatarColor": "#22D3EE"
+    },
+    {
+      "id": "t5",
+      "quote": "Calm under pressure, direct in code review, and generous with what he knows. Exactly who you want mentoring junior engineers.",
+      "name": "Sana Iqbal",
+      "role": "Engineering Manager, Northgate Systems",
+      "avatarColor": "#8B5CF6"
+    }
+  ]
+}
