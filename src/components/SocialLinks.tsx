@@ -1,73 +1,65 @@
-import { Github, Instagram, Linkedin, Mail, Globe } from "lucide-react";
+import { Github, Instagram, Linkedin, Mail, Globe, type LucideIcon } from "lucide-react";
 import type { SocialLinksData } from "../types/portfolio";
 
 interface SocialLinksProps {
   social: SocialLinksData;
-  variant?: "pill" | "plain";
   className?: string;
+  iconClassName?: string;
+  showLabels?: boolean;
 }
 
 interface SocialEntry {
-  key: keyof SocialLinksData;
-  href: string;
+  key: string;
   label: string;
-  icon: React.ComponentType<{ size?: number; strokeWidth?: number }>;
+  href: string;
+  Icon: LucideIcon;
 }
 
 function buildEntries(social: SocialLinksData): SocialEntry[] {
   const entries: SocialEntry[] = [
-    { key: "github", href: social.github ?? "", label: "GitHub", icon: Github },
-    { key: "linkedin", href: social.linkedin ?? "", label: "LinkedIn", icon: Linkedin },
-    { key: "instagram", href: social.instagram ?? "", label: "Instagram", icon: Instagram },
+    { key: "linkedin", label: "LinkedIn", href: social.linkedin ?? "", Icon: Linkedin },
+    { key: "github", label: "GitHub", href: social.github ?? "", Icon: Github },
+    { key: "instagram", label: "Instagram", href: social.instagram ?? "", Icon: Instagram },
     {
       key: "email",
-      href: social.email ? `mailto:${social.email}` : "",
       label: "Email",
-      icon: Mail,
+      href: social.email ? `mailto:${social.email}` : "",
+      Icon: Mail,
     },
-    { key: "website", href: social.website ?? "", label: "Website", icon: Globe },
+    { key: "website", label: "Website", href: social.website ?? "", Icon: Globe },
   ];
 
   return entries.filter((entry) => entry.href.trim().length > 0);
 }
 
-export default function SocialLinks({ social, variant = "pill", className = "" }: SocialLinksProps) {
+export default function SocialLinks({
+  social,
+  className = "",
+  iconClassName = "h-3.5 w-3.5 sm:h-4 sm:w-4",
+  showLabels = false,
+}: SocialLinksProps) {
   const entries = buildEntries(social);
 
   if (entries.length === 0) return null;
 
-  if (variant === "plain") {
-    return (
-      <div className={`flex flex-wrap items-center gap-4 ${className}`}>
-        {entries.map(({ key, href, label, icon: Icon }) => (
-          <a
-            key={key}
-            href={href}
-            target={key === "email" ? undefined : "_blank"}
-            rel="noreferrer"
-            aria-label={label}
-            className="flex items-center gap-2 text-sm text-neutral-400 transition-colors hover:text-neutral-100"
-          >
-            <Icon size={16} strokeWidth={1.75} />
-            <span>{label}</span>
-          </a>
-        ))}
-      </div>
-    );
-  }
-
   return (
-    <div className={`flex flex-wrap items-center gap-3 ${className}`}>
-      {entries.map(({ key, href, label, icon: Icon }) => (
+    <div className={`flex items-center gap-2 sm:gap-3 ${className}`}>
+      {entries.map(({ key, label, href, Icon }) => (
         <a
           key={key}
           href={href}
-          target={key === "email" ? undefined : "_blank"}
-          rel="noreferrer"
           aria-label={label}
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-neutral-800 bg-neutral-950/60 text-neutral-400 transition-all duration-300 hover:-translate-y-0.5 hover:border-fuchsia-500/50 hover:text-neutral-50 hover:shadow-[0_0_20px_-6px_rgba(217,70,239,0.55)]"
+          title={label}
+          target={href.startsWith("mailto:") ? undefined : "_blank"}
+          rel={href.startsWith("mailto:") ? undefined : "noreferrer"}
+          className="pill-gradient inline-flex items-center justify-center gap-1.5 rounded-full px-3 py-2 text-white transition duration-200 hover:scale-105 hover:shadow-[0_0_18px_rgba(182,0,168,0.45)] active:scale-100 sm:px-4 sm:py-2.5"
         >
-          <Icon size={18} strokeWidth={1.75} />
+          <Icon className={iconClassName} strokeWidth={2} />
+          {showLabels ? (
+            <span className="text-[0.65rem] font-medium uppercase tracking-widest sm:text-xs">
+              {label}
+            </span>
+          ) : null}
         </a>
       ))}
     </div>

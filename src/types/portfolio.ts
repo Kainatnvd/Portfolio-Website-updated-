@@ -17,6 +17,7 @@ export interface Profile {
   yearsOfExperience: number;
   bio: string;
   avatarSvg: string;
+  avatarImage?: string;
   social: SocialLinksData;
 }
 
@@ -36,6 +37,12 @@ export interface Experience {
   location: string;
   summary: string;
   highlights: string[];
+}
+
+export interface Service {
+  number: string;
+  name: string;
+  description: string;
 }
 
 export interface Project {
@@ -71,6 +78,7 @@ export interface PortfolioData {
   profile: Profile;
   skills: Skills;
   experience: Experience[];
+  services: Service[];
   projects: Project[];
   education: Education[];
   testimonials: Testimonial[];

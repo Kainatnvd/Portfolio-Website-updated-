@@ -1,5 +1,5 @@
-import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
+import MarqueeSection from "./components/MarqueeSection";
 import AboutSection from "./components/AboutSection";
 import ExperienceSection from "./components/ExperienceSection";
 import ServicesSection from "./components/ServicesSection";
@@ -9,16 +9,14 @@ import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="min-h-screen bg-[#0c0c0c] text-neutral-100">
-      <Navbar />
-      <main>
-        <HeroSection />
-        <AboutSection />
-        <ExperienceSection />
-        <ServicesSection />
-        <ProjectsSection />
-        <TestimonialsSection />
-      </main>
+    <div className="bg-[#0C0C0C]" style={{ overflowX: "clip" }}>
+      <HeroSection />
+      <MarqueeSection />
+      <AboutSection />
+      <ExperienceSection />
+      <ServicesSection />
+      <ProjectsSection />
+      <TestimonialsSection />
       <Footer />
     </div>
   );

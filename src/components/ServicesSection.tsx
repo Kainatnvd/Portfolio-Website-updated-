@@ -1,63 +1,53 @@
-import { motion } from "framer-motion";
-
-// TODO: move these rows into src/data/portfolio.json as a `services[]`
-// array once the data shape is finalized, and read them via usePortfolio()
-// instead of hardcoding them here.
-const SERVICES = [
-  {
-    title: "Backend Engineering",
-    description:
-      "API design, data modeling, and services built to stay correct and fast as traffic and team size grow.",
-  },
-  {
-    title: "AI / LLM Systems",
-    description:
-      "Retrieval pipelines, evaluation harnesses, and production-grade integrations around large language models.",
-  },
-  {
-    title: "Frontend Engineering",
-    description:
-      "Interfaces built with React and TypeScript that stay maintainable long after the first release ships.",
-  },
-  {
-    title: "Cloud & Infrastructure",
-    description:
-      "Kubernetes, CI/CD, and infrastructure-as-code set up so deploys are boring and rollbacks are fast.",
-  },
-];
+import FadeIn from "./FadeIn";
+import { usePortfolio } from "../hooks/usePortfolio";
 
 export default function ServicesSection() {
-  return (
-    <section id="services" className="mx-auto max-w-6xl px-6 py-28 md:px-10">
-      <div className="mb-14">
-        <span className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
-          Services
-        </span>
-        <h2 className="mt-4 text-3xl font-semibold text-neutral-100 sm:text-4xl">
-          How I can help
-        </h2>
-      </div>
+  const { services = [] } = usePortfolio();
 
-      <div className="divide-y divide-neutral-900 border-t border-neutral-900">
-        {SERVICES.map((service, index) => (
-          <motion.div
-            key={service.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.5, delay: index * 0.06, ease: "easeOut" }}
-            className="grid grid-cols-1 gap-4 py-8 md:grid-cols-[80px_1fr] md:gap-8"
+  return (
+    <section className="flex scroll-mt-20 flex-col rounded-t-[40px] bg-white px-5 py-20 sm:rounded-t-[50px] sm:px-8 sm:py-24 md:rounded-t-[60px] md:px-10 md:py-32">
+      <FadeIn delay={0} y={40}>
+        <h2
+          className="mb-16 w-full text-center font-black uppercase leading-none tracking-tight text-[#0C0C0C] sm:mb-20 md:mb-28"
+          style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
+        >
+          Services
+        </h2>
+      </FadeIn>
+
+      <div className="flex w-full flex-col items-center">
+        {services.map((service, i) => (
+          <FadeIn
+            key={service.number}
+            delay={i * 0.1}
+            y={30}
+            className="flex w-full max-w-5xl flex-col items-center"
           >
-            <span className="font-mono text-sm text-neutral-600">
-              {String(index + 1).padStart(2, "0")}
-            </span>
-            <div>
-              <h3 className="text-xl font-medium text-neutral-100">{service.title}</h3>
-              <p className="prose-body mt-2 max-w-[62ch] text-sm leading-relaxed text-neutral-400 md:text-base">
-                {service.description}
-              </p>
+            {i > 0 && <div className="w-full border-t border-black/10" />}
+            <div className="flex w-full items-start gap-6 py-8 sm:gap-8 sm:py-10 md:gap-10 md:py-12">
+              <span
+                className="flex-shrink-0 font-black uppercase leading-none text-[#0C0C0C]"
+                style={{ fontSize: "clamp(3rem, 10vw, 140px)" }}
+              >
+                {service.number}
+              </span>
+
+              <div className="flex flex-col gap-2 pt-1 sm:gap-4 md:gap-5">
+                <span
+                  className="font-medium uppercase text-[#0C0C0C]"
+                  style={{ fontSize: "clamp(1rem, 2.2vw, 2.1rem)" }}
+                >
+                  {service.name}
+                </span>
+                <span
+                  className="max-w-2xl font-light leading-relaxed text-[#0C0C0C]/60"
+                  style={{ fontSize: "clamp(0.85rem, 1.6vw, 1.25rem)" }}
+                >
+                  {service.description}
+                </span>
+              </div>
             </div>
-          </motion.div>
+          </FadeIn>
         ))}
       </div>
     </section>

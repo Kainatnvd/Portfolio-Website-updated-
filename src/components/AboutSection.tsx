@@ -1,96 +1,92 @@
-import { motion } from "framer-motion";
+import FadeIn from "./FadeIn";
+import ContactButton from "./ContactButton";
+import AnimatedText from "./AnimatedText";
 import { usePortfolio } from "../hooks/usePortfolio";
+
+const BLOB_POSITIONS = [
+  { className: "top-[6%] left-[2%] md:left-[5%]", x: -80, delay: 0.1 },
+  { className: "bottom-[10%] left-[4%] md:left-[9%]", x: -80, delay: 0.25 },
+  { className: "top-[6%] right-[2%] md:right-[5%]", x: 80, delay: 0.15 },
+  { className: "bottom-[10%] right-[4%] md:right-[9%]", x: 80, delay: 0.3 },
+];
 
 export default function AboutSection() {
   const { profile, skills } = usePortfolio();
 
   return (
-    <section id="about" className="mx-auto max-w-6xl px-6 py-28 md:px-10">
-      <div className="grid grid-cols-1 gap-10 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
-          <span className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
-            About
-          </span>
-          <h2 className="mt-4 text-3xl font-semibold leading-tight text-neutral-100 sm:text-4xl">
-            {profile.yearsOfExperience}+ years turning hard problems into
-            <span className="gradient-text-accent"> systems that hold.</span>
-          </h2>
-        </motion.div>
+    <section
+      id="about"
+      className="relative flex min-h-screen scroll-mt-20 flex-col items-center justify-center overflow-hidden px-5 py-20 sm:px-8 md:px-10"
+    >
+      {BLOB_POSITIONS.map((blob, i) => (
+        <FadeIn
+          key={blob.className}
+          delay={blob.delay}
+          x={blob.x}
+          y={0}
+          duration={0.9}
+          className={`pointer-events-none absolute z-0 h-[140px] w-[140px] rounded-full opacity-20 blur-3xl sm:h-[180px] sm:w-[180px] md:h-[220px] md:w-[220px] ${blob.className}`}
+          style={{
+            backgroundImage:
+              i % 2 === 0
+                ? "linear-gradient(135deg, #8B5CF6, #D946EF)"
+                : "linear-gradient(135deg, #D946EF, #F97316)",
+          }}
+        />
+      ))}
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
-          className="flex flex-col justify-center"
-        >
-          <p className="prose-body max-w-[62ch] text-base leading-relaxed text-neutral-400 md:text-lg">
-            {profile.bio}
-          </p>
-
-          <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-neutral-900 pt-8 sm:grid-cols-3">
-            <div>
-              <dt className="font-mono text-xs uppercase tracking-widest text-neutral-500">
-                Role
-              </dt>
-              <dd className="mt-1 text-sm text-neutral-200">{profile.role}</dd>
-            </div>
-            <div>
-              <dt className="font-mono text-xs uppercase tracking-widest text-neutral-500">
-                Focus
-              </dt>
-              <dd className="mt-1 text-sm text-neutral-200">{profile.specialization}</dd>
-            </div>
-            <div>
-              <dt className="font-mono text-xs uppercase tracking-widest text-neutral-500">
-                Based in
-              </dt>
-              <dd className="mt-1 text-sm text-neutral-200">{profile.location}</dd>
-            </div>
-          </dl>
-        </motion.div>
-      </div>
-
-      <div id="skills" className="mt-24 scroll-mt-20">
-        <motion.span
-          initial={{ opacity: 0, y: 12 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.5 }}
-          className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-500"
-        >
-          Skills
-        </motion.span>
-
-        <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {skills.categories.map((category, i) => (
-            <motion.div
-              key={category.name}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.5, delay: i * 0.05 }}
-              className="rounded-2xl border border-neutral-900 bg-neutral-950/40 p-6"
+      <div className="relative z-10 flex w-full max-w-4xl flex-col items-center gap-16 sm:gap-20 md:gap-24">
+        <div className="flex w-full flex-col items-center gap-10 sm:gap-14 md:gap-16">
+          <FadeIn delay={0} y={40}>
+            <h2
+              className="hero-heading w-full text-center font-black uppercase leading-none tracking-tight"
+              style={{ fontSize: "clamp(3rem, 12vw, 160px)" }}
             >
-              <h3 className="text-sm font-medium text-neutral-200">{category.name}</h3>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {category.items.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full border border-neutral-800 px-3 py-1 font-mono text-xs text-neutral-400"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+              About me
+            </h2>
+          </FadeIn>
+
+          <AnimatedText
+            text={profile.bio}
+            className="max-w-[560px] text-center font-medium leading-relaxed text-neutral-200"
+            style={{
+              fontSize: "clamp(1rem, 2vw, 1.35rem)",
+              overflowWrap: "normal",
+              wordBreak: "normal",
+            }}
+          />
         </div>
+
+        <div id="skills" className="w-full scroll-mt-20">
+          <FadeIn delay={0.1} y={30}>
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {skills.categories.map((category) => (
+                <div
+                  key={category.name}
+                  className="rounded-2xl border border-neutral-800 bg-neutral-950/50 p-6"
+                >
+                  <h3 className="text-sm font-semibold uppercase tracking-widest text-neutral-200">
+                    {category.name}
+                  </h3>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {category.items.map((item) => (
+                      <span
+                        key={item}
+                        className="rounded-full border border-neutral-800 px-3 py-1 font-mono text-xs text-neutral-400"
+                      >
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </FadeIn>
+        </div>
+
+        <FadeIn delay={0.3} y={20}>
+          <ContactButton href="#contact" />
+        </FadeIn>
       </div>
     </section>
   );

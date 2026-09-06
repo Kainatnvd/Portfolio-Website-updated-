@@ -1,94 +1,107 @@
-import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { motion, useTransform, type MotionValue } from "framer-motion";
+import LiveProjectButton from "./LiveProjectButton";
 import type { Project } from "../types/portfolio";
 
 interface ProjectCardProps {
   project: Project;
   index: number;
-  stickyOffset: number;
+  totalCards: number;
+  progress: MotionValue<number>;
 }
 
-export default function ProjectCard({ project, index, stickyOffset }: ProjectCardProps) {
+export default function ProjectCard({
+  project,
+  index,
+  totalCards,
+  progress,
+}: ProjectCardProps) {
+  const rangeStart = index / totalCards;
+  const rangeEnd = 1;
+  const targetScale = 1 - (totalCards - 1 - index) * 0.03;
+  const scale = useTransform(
+    progress,
+    [rangeStart, rangeEnd],
+    [1, targetScale],
+  );
+
   const hasLink = project.link.trim().length > 0;
   const hasImage = project.image.trim().length > 0;
 
   return (
-    <motion.article
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25 }}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      style={{ top: stickyOffset }}
-      className="sticky mb-8 overflow-hidden rounded-3xl border border-neutral-800 bg-neutral-950"
-    >
-      <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="relative aspect-[16/10] overflow-hidden bg-neutral-900 md:aspect-auto">
-          {hasImage ? (
-            <img
-              src={project.image}
-              alt={project.title}
-              className="h-full w-full object-cover"
-            />
-          ) : (
-            <div className="flex h-full min-h-[240px] w-full items-center justify-center bg-gradient-to-br from-neutral-900 via-neutral-950 to-black">
-              <span className="hero-heading px-6 text-center text-2xl font-semibold leading-tight sm:text-3xl">
+    <div className="sticky top-20 flex min-h-[80vh] items-start justify-center pb-12 sm:top-24 md:top-28">
+      <motion.div
+        style={{ scale, top: `${index * 20}px`, backgroundColor: "#0C0C0C" }}
+        className="relative flex w-full max-w-[1200px] origin-top flex-col gap-4 rounded-[30px] border-2 border-neutral-800 p-5 sm:gap-6 sm:rounded-[40px] sm:p-7 md:gap-8 md:rounded-[50px] md:p-8"
+      >
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-4 sm:gap-6 md:gap-8">
+            <span
+              className="flex-shrink-0 font-black uppercase leading-none text-neutral-100"
+              style={{ fontSize: "clamp(2.5rem, 6vw, 100px)" }}
+            >
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <div className="flex flex-col gap-1 sm:gap-2">
+              <span
+                className="font-medium uppercase text-neutral-100"
+                style={{ fontSize: "clamp(1rem, 1.8vw, 1.8rem)" }}
+              >
+                {project.subtitle}
+              </span>
+              <span
+                className="font-light tracking-wide text-neutral-300"
+                style={{ fontSize: "clamp(0.85rem, 1.4vw, 1.4rem)" }}
+              >
                 {project.title}
               </span>
             </div>
-          )}
-          <span className="absolute left-5 top-5 font-mono text-xs text-neutral-500">
-            {String(index + 1).padStart(2, "0")}
-          </span>
-        </div>
-
-        <div className="flex flex-col justify-between p-8 md:p-10">
-          <div>
-            <div className="flex flex-wrap items-center gap-3">
-              <h3 className="text-2xl font-semibold text-neutral-100">{project.title}</h3>
-              {project.highlight && (
-                <span className="rounded-full px-3 py-1 text-[10px] font-medium uppercase tracking-widest text-neutral-950 gradient-accent">
-                  Featured
-                </span>
-              )}
-            </div>
-            <p className="mt-1 text-sm text-neutral-500">{project.subtitle}</p>
-
-            <p className="prose-body mt-5 max-w-[52ch] text-sm leading-relaxed text-neutral-400 md:text-base">
-              {project.description}
-            </p>
-
-            <div className="mt-6 flex flex-wrap gap-2">
-              {project.stack.map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-full border border-neutral-800 px-3 py-1 font-mono text-xs text-neutral-400"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
           </div>
 
-          <div className="mt-8 flex items-center justify-between gap-4 border-t border-neutral-900 pt-6">
-            <div className="flex gap-6 font-mono text-xs text-neutral-500">
-              <span>{project.role}</span>
-              <span>{project.year}</span>
-            </div>
-
-            {hasLink && (
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-neutral-700 px-4 py-2 text-xs font-medium text-neutral-200 transition-colors hover:border-neutral-400 hover:text-white"
-              >
-                Live project
-                <ArrowUpRight size={14} />
-              </a>
-            )}
-          </div>
+          {hasLink && <LiveProjectButton href={project.link} />}
         </div>
-      </div>
-    </motion.article>
+
+        <p
+          className="max-w-3xl font-light leading-relaxed text-neutral-400"
+          style={{ fontSize: "clamp(0.85rem, 1.2vw, 1rem)" }}
+        >
+          {project.description}
+        </p>
+
+        <div className="flex flex-wrap gap-2">
+          {project.stack.map((tech) => (
+            <span
+              key={tech}
+              className="rounded-full border border-neutral-800 bg-neutral-900/50 px-3 py-1 font-mono text-xs text-neutral-400"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {hasImage ? (
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full rounded-[20px] object-cover sm:rounded-[30px]"
+            style={{ height: "clamp(160px, 20vw, 280px)" }}
+          />
+        ) : (
+          <div
+            className="relative flex w-full items-end overflow-hidden rounded-[20px] border border-neutral-800 bg-neutral-950 sm:rounded-[30px]"
+            style={{ height: "clamp(160px, 20vw, 280px)" }}
+          >
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(182,0,168,0.22),transparent_34%),linear-gradient(135deg,rgba(215,226,234,0.08),rgba(215,226,234,0.02))]" />
+            <span className="hero-heading relative p-5 text-xl font-semibold uppercase tracking-widest sm:text-2xl">
+              {project.title}
+            </span>
+          </div>
+        )}
+
+        <div className="flex flex-wrap gap-6 font-mono text-xs uppercase tracking-widest text-neutral-500">
+          <span>{project.role}</span>
+          <span>{project.year}</span>
+        </div>
+      </motion.div>
+    </div>
   );
 }

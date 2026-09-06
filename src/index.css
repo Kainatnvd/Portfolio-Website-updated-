@@ -77,6 +77,14 @@ section[id] {
   pointer-events: none;
 }
 
+/* Gradient CTA/social pill background — used by ContactButton, SocialLinks */
+.pill-gradient {
+  background: linear-gradient(123deg, #18011f 7%, #b600a8 37%, #7621b0 72%, #be4c00 100%);
+  box-shadow: 0px 4px 4px rgba(181, 1, 167, 0.25), 4px 4px 12px #7721b1 inset;
+  outline: 1px solid rgba(227, 227, 227, 0.8);
+  outline-offset: -2px;
+}
+
 /* About body copy — no mid-word breaks */
 .prose-body {
   overflow-wrap: normal;
@@ -85,34 +93,59 @@ section[id] {
 }
 
 /* Testimonials marquee */
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee-scroll 38s linear infinite;
+.testimonial-marquee {
+  overflow: hidden;
 }
 
-.marquee-row:hover .marquee-track {
+.testimonial-track {
+  animation: testimonial-marquee 34s linear infinite;
+}
+
+.testimonial-marquee:hover .testimonial-track {
   animation-play-state: paused;
 }
 
-@keyframes marquee-scroll {
+.testimonial-emoji {
+  animation: testimonial-float 3.2s ease-in-out infinite;
+}
+
+.testimonial-emoji-delay {
+  animation-delay: 0.8s;
+}
+
+@keyframes testimonial-marquee {
   from {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(calc(-50% - 10px));
+  }
+}
+
+@keyframes testimonial-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.04);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
-    animation: none;
+  .testimonial-marquee {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
+    padding-bottom: 1rem;
   }
-  .marquee-track > * {
+  .testimonial-track {
+    animation: none;
+  }
+  .testimonial-card {
     scroll-snap-align: start;
+  }
+  .testimonial-emoji {
+    animation: none;
   }
   html {
     scroll-behavior: auto;

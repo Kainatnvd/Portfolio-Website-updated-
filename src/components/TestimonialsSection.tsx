@@ -1,69 +1,76 @@
-import { Quote } from "lucide-react";
+import FadeIn from "./FadeIn";
 import { usePortfolio } from "../hooks/usePortfolio";
 import type { Testimonial } from "../types/portfolio";
 
-function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
-  const initial = testimonial.name.trim().charAt(0).toUpperCase();
+function getInitials(name: string) {
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0])
+    .join("")
+    .toUpperCase();
+}
 
+function TestimonialCard({ testimonial }: { testimonial: Testimonial }) {
   return (
-    <div className="mx-3 flex w-[340px] shrink-0 flex-col justify-between rounded-2xl border border-neutral-800 bg-neutral-950 p-7 sm:w-[400px]">
-      <Quote
-        size={28}
-        strokeWidth={1.5}
-        className="mb-5 text-neutral-700"
-        aria-hidden
-      />
-      <p className="prose-body flex-1 text-base italic leading-relaxed text-neutral-300">
+    <article className="testimonial-card flex h-[250px] w-[290px] flex-shrink-0 flex-col justify-between rounded-[30px] border border-neutral-800 bg-neutral-950 p-6 sm:h-[260px] sm:w-[340px] sm:rounded-[36px] sm:p-7">
+      <p className="text-sm italic leading-relaxed text-neutral-300 sm:text-[15px]">
         “{testimonial.quote}”
       </p>
 
-      <div className="mt-7 flex items-center gap-3 border-t border-neutral-900 pt-5">
+      <div className="flex items-center gap-3">
         <div
-          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-sm font-semibold text-neutral-950"
+          className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full text-xs font-black uppercase tracking-wider text-white"
           style={{ backgroundColor: testimonial.avatarColor }}
-          aria-hidden
         >
-          {initial}
+          {getInitials(testimonial.name)}
         </div>
-        <div>
-          <p className="text-sm font-medium uppercase tracking-wide text-neutral-100">
+        <div className="min-w-0">
+          <p className="truncate text-xs font-bold uppercase tracking-widest text-neutral-100">
             {testimonial.name}
           </p>
-          <p className="text-xs text-neutral-500">{testimonial.role}</p>
+          <p className="truncate text-xs text-neutral-500">{testimonial.role}</p>
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
 export default function TestimonialsSection() {
   const { testimonials } = usePortfolio();
-  const loop = [...testimonials, ...testimonials];
+  const marqueeItems = [...testimonials, ...testimonials];
+
+  if (!testimonials.length) return null;
 
   return (
-    <section className="border-y border-neutral-900 bg-black py-24">
-      <div className="mx-auto max-w-6xl px-6 md:px-10">
-        <span className="font-mono text-xs uppercase tracking-[0.3em] text-neutral-500">
-          Testimonials
-        </span>
-        <h2 className="mt-4 text-3xl font-semibold text-neutral-100 sm:text-4xl">
-          What people say
-        </h2>
+    <section className="relative overflow-hidden bg-[#0C0C0C] px-5 pb-20 pt-32 sm:px-8 sm:pb-24 sm:pt-40 md:px-10 md:pb-32 md:pt-52">
+      <div className="relative mx-auto max-w-6xl">
+        <FadeIn delay={0} y={40}>
+          <div className="relative mb-14 sm:mb-16 md:mb-20">
+            <h2
+              className="hero-heading w-full text-center font-black uppercase leading-none tracking-tight"
+              style={{ fontSize: "clamp(3rem, 11vw, 150px)" }}
+            >
+              What People Say
+            </h2>
+            <span className="testimonial-emoji absolute left-[4%] top-[-18%] rotate-[-14deg] text-3xl sm:text-5xl">
+              🤩
+            </span>
+            <span className="testimonial-emoji testimonial-emoji-delay absolute right-[12%] top-[-10%] rotate-[10deg] text-2xl sm:text-4xl">
+              💎
+            </span>
+            <span className="testimonial-emoji absolute bottom-[-14%] right-[4%] rotate-[-8deg] text-3xl sm:text-5xl">
+              🚀
+            </span>
+          </div>
+        </FadeIn>
       </div>
 
-      <div className="marquee-row relative mt-14 overflow-hidden">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-black to-transparent"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-black to-transparent"
-        />
-
-        <div className="marquee-track py-2">
-          {loop.map((testimonial, i) => (
-            <TestimonialCard key={`${testimonial.id}-${i}`} testimonial={testimonial} />
+      <div className="testimonial-marquee overflow-hidden">
+        <div className="testimonial-track flex w-max gap-4 sm:gap-5">
+          {marqueeItems.map((testimonial, index) => (
+            <TestimonialCard key={`${testimonial.id}-${index}`} testimonial={testimonial} />
           ))}
         </div>
       </div>
