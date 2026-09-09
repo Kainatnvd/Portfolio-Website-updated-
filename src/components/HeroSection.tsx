@@ -21,7 +21,7 @@ export default function HeroSection() {
       />
 
       <div className="relative z-0 flex flex-1 flex-col px-5 sm:px-8 md:px-10">
-        <FadeIn delay={0} y={-20}>
+        <FadeIn delay={0}>
           <Navbar />
         </FadeIn>
 
@@ -60,12 +60,13 @@ export default function HeroSection() {
         </div>
       </div>
 
+      {/* Magnet Wrapper */}
       <Magnet
         padding={150}
         strength={3}
         activeTransition="transform 0.3s ease-out"
         inactiveTransition="transform 0.6s ease-in-out"
-        className="absolute left-1/2 bottom-0 z-10 -translate-x-1/2"
+        className="absolute left-1/2 z-10 -translate-x-1/2 bottom-0 max-sm:top-[56%] max-sm:-translate-y-1/2"
         innerClassName="h-full flex items-end justify-center"
         style={{
           height: "clamp(350px, 55vh, 600px)",

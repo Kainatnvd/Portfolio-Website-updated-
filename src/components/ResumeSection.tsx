@@ -24,7 +24,7 @@ export default function ResumeSection() {
       <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center gap-8 text-center">
         {/* Heading with Floating Emojis */}
         <FadeIn delay={0.1} y={30}>
-          <div className="relative">
+          <div className="relative inline-block px-6 sm:px-12">
             <h2
               className="hero-heading font-black uppercase leading-none tracking-tight"
               style={{ fontSize: "clamp(2.5rem, 9vw, 120px)" }}
@@ -32,18 +32,18 @@ export default function ResumeSection() {
               My Resume
             </h2>
 
-            {/* Resume Emoji */}
-            <span className="testimonial-emoji absolute left-[4%] top-[-35%] rotate-[-14deg] text-3xl sm:text-5xl">
+            {/* Resume Emoji (Top Left) */}
+            <span className="testimonial-emoji absolute -left-2 -top-6 rotate-[-14deg] text-2xl sm:-left-8 sm:-top-10 sm:text-5xl">
               📄
             </span>
 
-            {/* Sparkles */}
-            <span className="testimonial-emoji testimonial-emoji-delay absolute right-[8%] top-[-25%] rotate-[10deg] text-2xl sm:text-4xl">
+            {/* Sparkles (Top Right) */}
+            <span className="testimonial-emoji testimonial-emoji-delay absolute -right-2 -top-5 rotate-[10deg] text-xl sm:-right-6 sm:-top-8 sm:text-4xl">
               ✨
             </span>
 
-            {/* Rocket */}
-            <span className="testimonial-emoji absolute bottom-[-25%] right-[2%] rotate-[-8deg] text-3xl sm:text-5xl">
+            {/* Rocket (Bottom Right) */}
+            <span className="testimonial-emoji absolute -bottom-6 -right-4 rotate-[-8deg] text-2xl sm:-bottom-8 sm:-right-10 sm:text-5xl">
               🚀
             </span>
           </div>
