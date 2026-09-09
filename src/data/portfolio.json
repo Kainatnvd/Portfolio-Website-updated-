@@ -10,6 +10,7 @@
     "bio": "I'm a Computer Science graduate specializing in full-stack web platforms and AI-powered conversational systems. My work bridges strong engineering fundamentals with UI/UX sensibility, spanning production-grade voicebots, full-stack applications, and cloud integrations using React, FastAPI, Python, and JavaScript. I care about building intuitive interfaces, automating workflows to boost support efficiency, and crafting reliable software that scales seamlessly.",
     "avatarSvg": "<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><defs><linearGradient id='avatarGrad' x1='0' y1='0' x2='1' y2='1'><stop offset='0%' stop-color='#8B5CF6'/><stop offset='50%' stop-color='#D946EF'/><stop offset='100%' stop-color='#F97316'/></linearGradient></defs><rect width='200' height='200' rx='24' fill='#131313'/><circle cx='100' cy='78' r='34' fill='none' stroke='url(#avatarGrad)' stroke-width='3'/><path d='M40 168c8-38 40-58 60-58s52 20 60 58' fill='none' stroke='url(#avatarGrad)' stroke-width='3' stroke-linecap='round'/></svg>",
     "avatarImage": "/avatar.png",
+    "resumeUrl": "/Kainat_Naveed_Resume.pdf",
     "social": {
       "github": "https://github.com/Kainatnvd",
       "instagram": "",

@@ -10,7 +10,7 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative flex h-screen scroll-mt-20 flex-col overflow-hidden"
+      className="relative flex h-dvh scroll-mt-20 flex-col overflow-hidden"
     >
       <div
         aria-hidden
