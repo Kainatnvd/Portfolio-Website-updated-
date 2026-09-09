@@ -11,11 +11,14 @@ export default function ResumeSection() {
   return (
     <section
       id="resume"
-      className="relative overflow-hidden bg-[#0C0C0C] px-5 py-24 sm:px-8 sm:py-28 md:px-10 md:py-36"
+      className="relative overflow-hidden px-5 py-24 sm:px-8 sm:py-28 md:px-10 md:py-36"
     >
+      {/* Expanded Glowing Background Sphere */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[420px] w-[680px] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-15 blur-[120px]"
+        className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full 
+                   w-[120vw] h-[500px] opacity-25 blur-[90px]
+                   sm:w-[680px] sm:h-[420px] sm:opacity-15 sm:blur-[120px]"
         style={{
           backgroundImage: "linear-gradient(120deg, #8B5CF6, #D946EF, #F97316)",
         }}
@@ -32,17 +35,17 @@ export default function ResumeSection() {
               My Resume
             </h2>
 
-            {/* Resume Emoji (Top Left) */}
+            {/* Resume Emoji */}
             <span className="testimonial-emoji absolute -left-2 -top-6 rotate-[-14deg] text-2xl sm:-left-8 sm:-top-10 sm:text-5xl">
               📄
             </span>
 
-            {/* Sparkles (Top Right) */}
+            {/* Sparkles */}
             <span className="testimonial-emoji testimonial-emoji-delay absolute -right-2 -top-5 rotate-[10deg] text-xl sm:-right-6 sm:-top-8 sm:text-4xl">
               ✨
             </span>
 
-            {/* Rocket (Bottom Right) */}
+            {/* Rocket */}
             <span className="testimonial-emoji absolute -bottom-6 -right-4 rotate-[-8deg] text-2xl sm:-bottom-8 sm:-right-10 sm:text-5xl">
               🚀
             </span>
